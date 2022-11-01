@@ -1,0 +1,52 @@
+{% extends 'signupbase.html' %}
+{% block content %}
+{% load static %}
+<!-- ======= Appointment Section ======= -->
+<section id="appointment" class="appointment section-bg">
+  <div class="container">
+
+    <div class="section-title">
+      <h2>Signup Here</h2>
+
+    </div>
+    <div>
+      {% if signup.errors %}
+{% for field in signup %}
+{% for error in field.errors %}
+<div>
+  <strong> {{field.name}} {{ error|escape }}</strong>
+</div>
+{% endfor %}
+{% endfor %}
+{% for error in form.non_field_errors %}
+<div>
+  <strong>{{ error.name }} {{ error|escape }}</strong>
+</div>
+{% endfor %}
+{% endif %}
+
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+    </div>
+    <form class="php-email-form" method="POST">
+      {% csrf_token %}
+      <div class="row">
+      {% for field in signup %}
+        <div class="col-md-4 form-group">
+          {{ field }}
+        </div>
+        {% if forloop.counter == '3' %}
+      </div>
+        {% endif %}
+      {% endfor %}
+      <div class="text-center"><button name="btnSubmit" type="submit">Signup</button></div>
+    </form>
+
+  </div>
+</section><!-- End Appointment Section -->
+{% endblock content %}

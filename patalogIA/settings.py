@@ -16,7 +16,7 @@ SECRET_KEY = 'django-insecure-g#r69+e_m0(yfsqui^fu7eo^q*x7tx@5yr0k2hr43yh9jd-40$
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 AUTH_USER_MODEL = 'accounts.User'
 
@@ -53,7 +53,9 @@ ROOT_URLCONF = 'patalogIA.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            os.path.join(BASE_DIR, 'templates'),
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
