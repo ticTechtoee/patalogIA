@@ -1,7 +1,8 @@
 from django.db import models
+import uuid
 
 class Image(models.Model):
-    idimage = models.AutoField(primary_key=True)
+    idimage = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
     path = models.CharField(max_length=250, blank=True, null=True)
     dataimg = models.DateTimeField(blank=True, null=True)
     codtype_picture = models.ForeignKey('ImageType', models.DO_NOTHING, db_column='codtipoimagem', blank=True, null=True)
@@ -13,14 +14,14 @@ class Image(models.Model):
 
 
 class ImageType(models.Model):
-    id_type_image = models.AutoField(primary_key=True)
+    id_type_image = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
     description = models.CharField(max_length=50, blank=True, null=True)
 
     class Meta:
         db_table = 'image_type'
 
 class ImagesQuestions(models.Model):
-    idimages_questions = models.AutoField(primary_key=True)
+    idimages_questions = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
     daterecord = models.DateTimeField(blank=True, null=True)
     id_image = models.ForeignKey(Image, models.DO_NOTHING, db_column='id_imagem', blank=True, null=True)
     id_quest = models.ForeignKey('questions.Questions', models.DO_NOTHING, db_column='id_questao', blank=True, null=True)
@@ -32,7 +33,7 @@ class ImagesQuestions(models.Model):
 # Temp
 
 class Specialty(models.Model):
-    idespecialty = models.AutoField(primary_key=True)
+    idespecialty = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
     description = models.CharField(max_length=50, blank=True, null=True)
 
     class Meta:

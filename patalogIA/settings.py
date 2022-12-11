@@ -49,6 +49,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'patalogIA.urls'
+AUTHENTICATION_BACKENDS = ['accounts.backends.CustomUserModelBackend']
 
 TEMPLATES = [
     {

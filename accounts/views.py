@@ -1,8 +1,9 @@
 from django.shortcuts import render,redirect
+from django.http import HttpResponse
 from .forms import signupForm
 from django.contrib import messages
 from django.contrib.auth import login, authenticate, logout
-
+from .models import User
 
 def accounts(request):
     form = signupForm(request.POST or None)
@@ -18,16 +19,19 @@ def accounts(request):
 
 def loginUser(request):
     if request.method == 'POST':
-        username = request.POST.get('username')
-        raw_password = request.POST.get('password')
-        user = authenticate(username=username, password=raw_password)
+        userEmail = request.POST.get('email')
+        rawPassword = request.POST.get('password')
+        user = authenticate(email=userEmail, password=rawPassword)
         if user is not None:
             if user.is_superuser:
-                login(request, user)
+                #login(request, user)
                 print('superuser')
             elif not user.is_superuser:    
-                login(request, user)
-                print('logged in!')
+                generalInfo = User.objects.get(email = userEmail)
+                if str(generalInfo.usertype) == "Student":
+                    print('Students')
+                elif str(generalInfo.usertype) == "Guest":
+                    print('Guest')
         else:
             return redirect('accounts:login')
     return render(request, 'accounts/login.html')

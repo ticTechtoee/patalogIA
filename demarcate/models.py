@@ -1,7 +1,8 @@
 from django.db import models
+import uuid
 
 class demarcate(models.Model):
-    idmarks = models.AutoField(primary_key=True)
+    idmarks = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
     x = models.IntegerField(blank=True, null=True)
     y = models.IntegerField(blank=True, null=True)
     w = models.IntegerField(blank=True, null=True)

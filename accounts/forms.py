@@ -5,12 +5,12 @@ class signupForm(forms.ModelForm):
     username = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'username'}))
     full_name = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'full name'}))
     email = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'email'}))
-    telephone = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'tel number'}))
+    mobile_number = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'mobile number'}))
     password=forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'password'}))
     confirm_password=forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'confirm password'}))
     class Meta:
         model=User
-        fields=('username','full_name','email','password','confirm_password','telephone','usertype')
+        fields=('username','full_name','email','password','confirm_password','mobile_number','usertype')
 
     def clean(self):
         cleaned_data = super(signupForm, self).clean()
