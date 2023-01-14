@@ -1,15 +1,123 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        #canvas {
+            cursor: crosshair;
+            border: 1px solid #000000;
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-position: center center;
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <title>Document</title>
 </head>
+
 <body>
     <h2>MCQs</h2>
-    <form action="" method="post">
-        {{form}}
+    <canvas id="canvas" width="800" height="500"></canvas>
+    <p>
+        <label for="id_question_image">Question image:</label>
+        <!-- <input type="file" name="question_image" accept="image/*" id="id_question_image"> -->
+        <output id="list"></output></p>
+        <form action="" method="post" enctype="multipart/form-data">
+            {{form.as_p}}
+            X1: <input type="text" name="x1" id="x1" value="0" hidden>
+            Y1: <input type="text" name="y1" id="y1" value="0" hidden>
+            X2: <input type="text" name="x2" id="x2" value="0" hidden>
+            Y2: <input type="text" name="y2" id="y2" value="0" hidden>
+            <button type="submit" name="submitbtn">Submit</button>
     </form>
+
+    {% if img_obj %}
+    <h3>Succesfully uploaded : {{img_obj.title}}</h3>
+    <img src="{{ img_obj.image.url}}" alt="connect" style="max-height:300px">
+    {% endif %}
+
+
+
+
+
+    <script>
+        //Show Image before uploading
+        function uploadImage(input) {
+            if (input.files && input.files[0]) {
+                var url = URL.createObjectURL(input.files[0]);
+                $('#canvas').attr('style', 'background-image:url(' + url + ')');
+            }
+        }
+        document.getElementById("id_question_image").onchange = function () { uploadImage(this) };
+        // Creating the demarcation tool
+
+        var canvas = document.getElementById("canvas"),ctx = canvas.getContext("2d");
+        //Variables
+        var canvasx = $(canvas).offset().left;
+        var canvasy = $(canvas).offset().top;
+        var last_mousex = last_mousey = 0;
+        var mousex = mousey = 0;
+        var mousedown = false;
+        var x1 = 0, x2 = 0, y1 = 0, y2 = 0;
+        //Mousemove
+        $(canvas).on('mousemove', function (e) {
+            mousex = parseInt(e.clientX - canvasx);
+            mousey = parseInt(e.clientY - canvasy);
+            if (mousedown) {
+                ctx.clearRect(0, 0, canvas.width, canvas.height); //clear canvas
+                ctx.beginPath();
+                var width = mousex - last_mousex;
+                var height = mousey - last_mousey;
+                ctx.rect(last_mousex, last_mousey, width, height);
+                ctx.strokeStyle = 'red';
+                ctx.lineWidth = 5;
+                ctx.stroke();
+            }
+            //Output
+            x2 = e.clientX;
+            y2 = e.clientY;
+        });
+        //Mousedown
+        $(canvas).on('mousedown', function (e) {
+            last_mousex = parseInt(e.clientX - canvasx);
+            last_mousey = parseInt(e.clientY - canvasy);
+            mousedown = true;
+            x1 = e.clientX;
+            y1 = e.clientY;
+        });
+        //Mouseup
+        $(canvas).on('mouseup', function (e) {
+            mousedown = false;
+            //for testing
+            document.getElementById("x1").value = x1;
+            document.getElementById("y1").value = y1;
+            document.getElementById("x2").value = x2;
+            document.getElementById("y2").value = y2;
+
+        });
+
+        // $(document).ready(function () {
+
+        //     $("button").click(function () {
+
+        //         $.post("http://127.0.0.1:8000/questions/demarcate",
+        //             {
+
+        //                 x1: document.getElementById("x1").value,
+        //                 y1: document.getElementById("y1").value,
+        //                 x2: document.getElementById("x2").value,
+        //                 y2: document.getElementById("y2").value,
+
+        //             },
+        //         );
+        //     });
+        // });
+
+
+    </script>
 </body>
+
 </html>

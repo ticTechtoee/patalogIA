@@ -6,7 +6,7 @@ app_name = 'questions'
 
 urlpatterns = [
     path('',views.question, name='questiontype'),
-    path('demarcate',views.demarcate, name='demarcatePage'),
+    path('demarcate',views.createDemarcate, name='demarcatePage'),
     path('MCQs',views.MCQs, name='MCQsPage'),
     path('quiz',views.showQuestions, name='quiz'),
     path('quizdetail/<str:pk>', views.quizdetail, name='quizdetail'),

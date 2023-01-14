@@ -4,11 +4,12 @@ import uuid
 class Image(models.Model):
     idimage = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
     path = models.CharField(max_length=250, blank=True, null=True)
+    question_image = models.ImageField(upload_to='question_images/', null=True, blank=True)
     dataimg = models.DateTimeField(blank=True, null=True)
     codtype_picture = models.ForeignKey('ImageType', models.DO_NOTHING, db_column='codtipoimagem', blank=True, null=True)
     useriduser = models.ForeignKey('accounts.User', models.DO_NOTHING, db_column='usuarioidusuario', blank=True, null=True)
     specialtydespecialty = models.ForeignKey('Specialty', models.DO_NOTHING, db_column='especialidadeidespecialidade', blank=True, null=True)
-
+    
     class Meta:
         db_table = 'image'
 
