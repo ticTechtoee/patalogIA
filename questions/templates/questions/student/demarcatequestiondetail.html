@@ -9,9 +9,8 @@
         #canvas {
             cursor: crosshair;
             border: 1px solid #000000;
-            background-repeat: no-repeat;
-            background-size: contain;
-            background-position: center center;
+            background: url('{{question.questionImage.url}}');
+            background-size: 100% 100%;
         }
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
@@ -26,35 +25,25 @@
         <!-- <input type="file" name="question_image" accept="image/*" id="id_question_image"> -->
         <output id="list"></output></p>
         <form action="" method="post" enctype="multipart/form-data">
-            {{form.as_p}}
-            X1: <input type="text" name="x1" id="x1" value="0" hidden>
-            Y1: <input type="text" name="y1" id="y1" value="0" hidden>
-            X2: <input type="text" name="x2" id="x2" value="0" hidden>
-            Y2: <input type="text" name="y2" id="y2" value="0" hidden>
+            {% csrf_token %}
+            X1: <input type="text" name="x1" id="x1" value="0">
+            Y1: <input type="text" name="y1" id="y1" value="0">
+            X2: <input type="text" name="x2" id="x2" value="0">
+            Y2: <input type="text" name="y2" id="y2" value="0">
             <button type="submit" name="submitbtn">Submit</button>
     </form>
-
-    {% if img_obj %}
-    <h3>Succesfully uploaded : {{img_obj.title}}</h3>
-    <img src="{{ img_obj.image.url}}" alt="connect" style="max-height:300px">
-    {% endif %}
 
 
 
 
 
     <script>
-        //Show Image before uploading
-        function uploadImage(input) {
-            if (input.files && input.files[0]) {
-                var url = URL.createObjectURL(input.files[0]);
-                $('#canvas').attr('style', 'background-image:url(' + url + ')');
-            }
-        }
-        document.getElementById("id_questionImage").onchange = function () { uploadImage(this) };
         // Creating the demarcation tool
 
-        var canvas = document.getElementById("canvas"),ctx = canvas.getContext("2d");
+        //var canvas = document.getElementById("canvas"),ctx = canvas.getContext("2d");
+
+        var canvas=document.getElementById('canvas'),ctx= canvas.getContext('2d');
+
         //Variables
         var canvasx = $(canvas).offset().left;
         var canvasy = $(canvas).offset().top;
@@ -72,7 +61,7 @@
                 var width = mousex - last_mousex;
                 var height = mousey - last_mousey;
                 ctx.rect(last_mousex, last_mousey, width, height);
-                ctx.strokeStyle = 'red';
+                ctx.strokeStyle = 'blue';
                 ctx.lineWidth = 5;
                 ctx.stroke();
             }
@@ -99,22 +88,6 @@
 
         });
 
-        // $(document).ready(function () {
-
-        //     $("button").click(function () {
-
-        //         $.post("http://127.0.0.1:8000/questions/demarcate",
-        //             {
-
-        //                 x1: document.getElementById("x1").value,
-        //                 y1: document.getElementById("y1").value,
-        //                 x2: document.getElementById("x2").value,
-        //                 y2: document.getElementById("y2").value,
-
-        //             },
-        //         );
-        //     });
-        // });
 
 
     </script>
