@@ -1,6 +1,6 @@
 from .models import QuestionTypes,Questions,Questionnaire
 from django import forms
-from images.models import Image
+from demarcate.models import demarcateQuestion
 class QuestionTypeForm(forms.ModelForm):
     category = forms.ModelChoiceField(queryset=QuestionTypes.objects.all(), to_field_name="category", empty_label="Select Category")
     class Meta:
@@ -20,7 +20,8 @@ class CreateQuestionnaireForm(forms.ModelForm):
         fields = '__all__'
 
 
-class uploadImageForm(forms.ModelForm):
+class createImageQuestion(forms.ModelForm):
     class Meta:
-        model = Image 
+        model = demarcateQuestion 
         fields = '__all__'
+        exclude = ('x','y','w','h','area')

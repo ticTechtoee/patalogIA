@@ -15,3 +15,16 @@ class demarcate(models.Model):
 
     class Meta:
         db_table = 'demarcate'
+
+class demarcateQuestion(models.Model):
+    idmarks = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
+    x = models.IntegerField(blank=True, null=True)
+    y = models.IntegerField(blank=True, null=True)
+    w = models.IntegerField(blank=True, null=True)
+    h = models.IntegerField(blank=True, null=True)
+    area = models.IntegerField(blank=True, null=True)
+    questionImage = models.ImageField(upload_to='question_images/', null=True, blank=True)
+    question = models.CharField(max_length=500)
+
+    def __str__(self):
+        return self.question
