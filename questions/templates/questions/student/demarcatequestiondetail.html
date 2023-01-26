@@ -1,42 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
-
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        #canvas {
-            cursor: crosshair;
-            border: 1px solid #000000;
-            background: url('{{question.questionImage.url}}');
-            background-size: 100% 100%;
-        }
-    </style>
+    <!-- Demarcate question details CSS -->
+    <link href="{% static 'assets/css/DemarcatequestionsCSS.css' %}" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <title>Document</title>
 </head>
-
 <body>
-    <h2>MCQs</h2>
-    <canvas id="canvas" width="800" height="500"></canvas>
-    <p>
+    <section id="appointment" class="appointment section-bg">
+    <div class="container">
+            <div class="text-center">
+        <div class="section-title">
+        <h2>MCQs</h2>
+        </div>
+        <canvas style="background: url('{{question.questionImage.url}}');" id="canvas" width="800" height="500"></canvas>
+        <p>
         <label for="id_questionImage">Question image:</label>
         <!-- <input type="file" name="question_image" accept="image/*" id="id_question_image"> -->
         <output id="list"></output></p>
-        <form action="" method="post" enctype="multipart/form-data">
+    <form action="" method="post" class="php-email-form" enctype="multipart/form-data" id="QuestionForm">
             {% csrf_token %}
-            X1: <input type="text" name="x1" id="x1" value="0">
-            Y1: <input type="text" name="y1" id="y1" value="0">
-            X2: <input type="text" name="x2" id="x2" value="0">
-            Y2: <input type="text" name="y2" id="y2" value="0">
+        <div class="container">
+  <div class="row justify-content-md-center">
+    <div class="col col-lg-8">
+    <div class="row align-items-center g-3 p-3">
+        <div class="col-3">
+            X1:<input class="form-control" type="text" name="x1" id="x1" value="0">
+        </div>
+        <div class="col-3">
+            Y1:<input class="form-control" type="text" name="y1" id="y1" value="0">
+        </div>
+        <div class="col-3">
+            X2:<input class="form-control" type="text" name="x2" id="x2" value="0">
+            </div>
+        <div class="col-3">
+            Y2:<input class="form-control" type="text" name="y2" id="y2" value="0">
+        </div>
+    </div>
+        </div>
+      </div>
+            </div>
             <button type="submit" name="submitbtn">Submit</button>
     </form>
-
-
-
-
-
+            </div>
     <script>
         // Creating the demarcation tool
 
@@ -87,10 +99,11 @@
             document.getElementById("y2").value = y2;
 
         });
-
-
-
     </script>
-</body>
+    </div>
+            </div>
 
+    </section>
+</body>
 </html>
+{% endblock content %}

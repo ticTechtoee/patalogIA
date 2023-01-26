@@ -1,0 +1,23 @@
+#canvas {
+            cursor: crosshair;
+            border: 1px solid #000000;
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-position: center center;
+        }
+section {
+  padding: 90px 0;
+  overflow: hidden;
+}
+.section-title {
+  text-align: center;
+  padding-bottom: 05px;
+}
+.section-title h2 {
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 05px;
+  padding-bottom: 05px;
+  position: relative;
+  color: #2c4964;
+}

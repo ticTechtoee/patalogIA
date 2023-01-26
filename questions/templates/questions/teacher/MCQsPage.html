@@ -1,17 +1,30 @@
 <!DOCTYPE html>
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>MCQs</title>
 </head>
 <body>
-    <h2>MCQs</h2>
-    <form action="" method="post">
+<section id="appointment" class="appointment section-bg">
+    <div class="container">
+    <div class="section-title">
+        <h2>MCQs</h2>
+        </div>
+    <form class="php-email-form" method="POST">
         {% csrf_token %}
-        {{form}}
-    <button type="submit">Submit</button>
+        {{form.as_p}}
+    <div class="text-center">
+        <button type="submit">Submit</button>
+    </div>
     </form>
+    </div>
+</section>
+<!-- End Appointment Section -->
 </body>
 </html>
+{% endblock content %}

@@ -1,4 +1,4 @@
-from .models import User
+from .models import User, UserType
 from django import forms
 
 class signupForm(forms.ModelForm):
@@ -8,6 +8,12 @@ class signupForm(forms.ModelForm):
     mobile_number = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'mobile number'}))
     password=forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'password'}))
     confirm_password=forms.CharField(widget=forms.PasswordInput(attrs={'placeholder': 'confirm password'}))
+    usertype = forms.ModelChoiceField(
+        queryset=UserType.objects.all(),
+        label="",
+        empty_label="Select User type"
+    )
+    usertype.widget.attrs.update({'class': 'form-select', 'placeholder': 'Select User type'})
     class Meta:
         model=User
         fields=('username','full_name','email','password','confirm_password','mobile_number','usertype')

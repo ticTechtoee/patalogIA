@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'questions.apps.QuestionsConfig',
     'reports.apps.ReportsConfig',
     'video.apps.VideoConfig',
+    'home.apps.HomeConfig',
 ]
 
 MIDDLEWARE = [
@@ -75,14 +76,10 @@ WSGI_APPLICATION = 'patalogIA.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-pymysql.install_as_MySQLdb()
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'OPTIONS': {
-            'read_default_file': 'sql.cnf',
-        },
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'mydatabase',
     }
 }
 
