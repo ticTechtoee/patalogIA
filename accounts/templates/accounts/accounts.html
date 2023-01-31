@@ -1,13 +1,19 @@
 {% extends 'signupbase.html' %}
 {% block content %}
 {% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <!-- Demarcate CSS -->
+    <link href="{% static 'assets/css/Login&SignupCSS.css' %}" rel="stylesheet">
+    <title>Signup</title>
+</head>
 <!-- ======= Appointment Section ======= -->
 <section id="appointment" class="appointment section-bg">
   <div class="container">
-
     <div class="section-title">
       <h2>Signup Here</h2>
-
     </div>
     <div>
       {% if signup.errors %}
@@ -24,29 +30,61 @@
 </div>
 {% endfor %}
 {% endif %}
-
 {% if messages %}
 <ul class="messages">
     {% for message in messages %}
-    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    <li>{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
     {% endfor %}
 </ul>
 {% endif %}
     </div>
-    <form class="php-email-form" method="POST">
+    <form class="php-email-form" method="POST" id="loginform">
+       <h1>Sign Up with</h1>
+                <div class="social-container">
+                    <a href="" target="_blank" class="btn btn-outline-dark"><i class="bi-github"></i></a>
+                    <a href="" target="_blank" class="btn btn-outline-primary"><i class="bi-facebook"></i></a>
+                    <a href="" target="_blank" class="btn btn-outline-danger"><i class="bi-google"></i></a>
+                </div>
+       <span>Or use your Email for registration</span>
+        <hr>
       {% csrf_token %}
       <div class="row">
       {% for field in signup %}
-        <div class="col-md-4 form-group">
+        <div class="row-md-12 form-group">
           {{ field }}
         </div>
         {% if forloop.counter == '3' %}
       </div>
         {% endif %}
       {% endfor %}
+        <br><br><br>
       <div class="text-center"><button name="btnSubmit" type="submit">Signup</button></div>
     </form>
-
   </div>
 </section><!-- End Appointment Section -->
+<style>
+body {
+    text-align: center;
+}
+    #loginform {
+    display: inline-block;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: flex-start;
+	padding: 48px;
+	width:35%;
+	margin-top: 2rem;
+	background-color: #fff;
+	border-radius: 4px;
+	box-shadow: 4px 4px 7px lightgray;
+}
+.social-container {
+  margin: 20px 0;
+  display: block;
+}
+
+.social-container a {
+  border-radius: 50px;
+}
+</style>
 {% endblock content %}

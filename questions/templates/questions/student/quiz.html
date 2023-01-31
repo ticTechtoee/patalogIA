@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -7,8 +10,31 @@
     <title>Question Page For Student</title>
 </head>
 <body>
-    {% for Question in QuestionText %}
-    <h3><a href="{% url 'questions:quizdetail' Question.description %}">{{Question.description}}</a></h3>
-    {% endfor %}
+<section id="appointment" class="appointment section-bg">
+    <div class="container">
+    <div class="section-title">
+        <h2>Question Page For Student</h2>
+    </div>
+<div class="container">
+  <div class="row">
+    <div class="col-12 col-sm-12 col-lg-12">
+      <ul class="list-group mb-3">
+          {% for Question in QuestionText %}
+        <a style="text-align:center;margin: 10px 0;" href="{% url 'questions:quizdetail' Question.description %}" class="btn btn-outline-primary">
+            <h5 style="margin-top: 8px;">Question : {{Question.question}}</h5>
+        </a>
+          {% endfor %}
+      </ul>
+    </div>
+  </div>
+</div>
+        </div>
+</section>
+<!-- End Appointment Section -->
 </body>
+<style>
+
+</style>
 </html>
+
+{% endblock content %}

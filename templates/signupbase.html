@@ -6,7 +6,6 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Medilab Bootstrap Template - Index</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -30,7 +29,7 @@
   <link href="{% static 'assets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
 
   <!-- Template Main CSS File -->
-  <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/css/homestyle.css' %}" rel="stylesheet">
 
   <!-- =======================================================
   * Template Name: Medilab - v4.9.1
@@ -41,43 +40,34 @@
 </head>
 
 <body>
-
-  <!-- ======= Top Bar ======= -->
-  <div id="topbar" class="d-flex align-items-center fixed-top">
-    <div class="container d-flex justify-content-between">
-      <div class="contact-info d-flex align-items-center">
-        <i class="bi bi-envelope"></i> <a href="mailto:contact@example.com">contact@example.com</a>
-        <i class="bi bi-phone"></i> +1 5589 55488 55
-      </div>
-      <div class="d-none d-lg-flex social-links align-items-center">
-        <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
-        <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
-        <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
-        <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></i></a>
-      </div>
-    </div>
-  </div>
-
-  <!-- ======= Header ======= -->
+<!-- ======= Header ======= -->
   <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center">
 
-      <h1 class="logo me-auto"><a href="index.html">Patalog IA</a></h1>
+      <h1 class="logo me-auto"><a href="index.html">PatalogIA</a></h1>
       <!-- Uncomment below if you prefer to use an image logo -->
       <!-- <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
       <nav id="navbar" class="navbar order-last order-lg-0">
         <ul>
-          <li><a class="nav-link scrollto active" href="#hero">Start</a></li>
-          <li><a class="nav-link scrollto" href="#about">Registration</a></li>
-          <li><a class="nav-link scrollto" href="#services">Questionnaires</a></li>
-          <li><a class="nav-link scrollto" href="#departments">Studies</a></li>
-          <li><a class="nav-link scrollto" href="#doctors">Prediction</a></li>
-          <li><a class="nav-link scrollto" href="#contact">Forum</a></li>
+          <li><a class="nav-link scrollto active" href="{% url 'home:StartPage' %}">Home</a></li>
+          <li><a class="nav-link scrollto" href="{% url 'registration:signup' %}">Registration</a></li>
+          <li><a class="nav-link scrollto" href="{% url 'questions:questiontype' %}">Questions Page</a></li>
+          <li><a class="nav-link scrollto" href="#">Studies</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Prediction
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+             
+              <li><a class="dropdown-item" href="{% url 'predication:tuberculosePage' %}">Tuberculosis</a></li>
+            </ul>
+          </li>
+          <li><a class="nav-link scrollto" href="{% url 'forum:forum-index' %}">Forum</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
-      <a href="{% url 'accounts:login' %}" class="appointment-btn scrollto"><span class="d-none d-md-inline">Login</span></a>
+      <a href="{% url 'registration:signup' %}" class="appointment-btn scrollto"><span class="d-none d-md-inline">Login</span></a>
 
     </div>
   </header><!-- End Header -->

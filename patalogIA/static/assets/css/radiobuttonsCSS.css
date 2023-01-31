@@ -1,0 +1,40 @@
+    .custom-choose
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.custom-choose input[type='radio'],.custom-choose input[type='checkbox']
+{
+    display: none;
+}
+.custom-choose input[type='radio'] + label,.custom-choose input[type='radio']:not(checked) + label
+,.custom-choose input[type='checkbox'] + label,.custom-choose input[type='checkbox']:not(checked) + label
+{
+    padding: 13px 45.5px;
+    border: solid 2px #1977cc;
+    border-radius: 50px;
+    width:100%;
+    text-align: center;
+    font-size: 22px;
+        cursor: pointer;
+
+}
+.custom-choose input[type='radio']:checked + label,
+.custom-choose input[type='checkbox']:checked + label
+{
+    position: relative;
+    border: solid 1px lightgrey;
+    background: #1977cc;
+    color: #FFF;
+    transition: .4s;
+}
+.custom-choose input[type='radio']:checked + label::before,
+.custom-choose input[type='checkbox']:checked + label::before
+{
+    font-family: FontAwesome;
+    content: "\f058";
+    position: absolute;
+    left: 25px;
+}
+
