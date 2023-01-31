@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'crispy_forms',
     'accounts.apps.AccountsConfig',
     'demarcate.apps.DemarcateConfig',
     'forum.apps.ForumConfig',
@@ -37,6 +38,7 @@ INSTALLED_APPS = [
     'reports.apps.ReportsConfig',
     'video.apps.VideoConfig',
     'home.apps.HomeConfig',
+    'predication.apps.PredicationConfig',
 ]
 
 MIDDLEWARE = [
@@ -76,13 +78,26 @@ WSGI_APPLICATION = 'patalogIA.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': 'mydatabase',
+#     }
+# }
+
+# Database
+# https://docs.djangoproject.com/en/4.1/ref/settings/#databases
+
+pymysql.install_as_MySQLdb()
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'mydatabase',
+        'ENGINE': 'django.db.backends.mysql',
+        'OPTIONS': {
+            'read_default_file': 'sql.cnf',
+        },
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators

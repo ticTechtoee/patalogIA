@@ -7,11 +7,6 @@ from django.views.decorators.csrf import csrf_exempt
 import math
 
 
-
-
-
-
-
 def question(request):
     form = QuestionTypeForm(request.POST or None)
     if form.is_valid():
